@@ -121,9 +121,11 @@ public class Reformat {
 
             tempList.forEach(nextLine -> {
                 try {
-                    fw.write("\t");
                     for (int i = 2; i < nextLine.length; i++) {
-                        fw.write(nextLine[i] + " ");
+                        if (nextLine[i].contains("."))
+                            fw.write(String.format("%9.3f", Float.parseFloat(nextLine[i])));
+                        else
+                            fw.write(String.format("%5d", Integer.parseInt(nextLine[i])));
                     }
                     fw.write("\n");
                 } catch (IOException e) {
